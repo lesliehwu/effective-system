@@ -1,0 +1,10 @@
+<p *ngIf="submitted">Thank you four submitting {{products[0].title}} for the price of {{products[0].price}}. {{products[0].url}}</p>
+<form (submit)="onSubmit(formData)" name="formData" #formData="ngForm">
+    <p>*Title: <input type='text' name='title' required minlength='4' [(ngModel)]='product.title' #title='ngModel'/></p>
+    <p *ngIf='!title.valid && title.dirty'>Title is required</p>
+    <p>*Price: <input type='number' name='price' required min='0.01' step='0.01' value='0' [(ngModel)]="product.price" #price="ngModel"/></p>
+    <p *ngIf='!price.valid && price.dirty'>Price is required</p>
+    <p>Image Url: <input type='url' name='url' [(ngModel)]='product.url' #url='ngModel'/></p>
+    <button type='submit' [disabled]='!formData.valid'>Submit</button>
+    <p *ngIf='!formData.valid'>Please fill out all fields</p>
+</form>
